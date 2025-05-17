@@ -1,4 +1,3 @@
-
 import { authService } from "./authService";
 import { 
   Transaction, 
@@ -9,6 +8,7 @@ import {
 } from "../types/wallet";
 import { fraudService } from "./fraudService";
 import { toast } from "sonner";
+import { User } from "../types/auth";
 
 // Mock storage keys
 const WALLETS_KEY = "digital_wallet_balances";
@@ -274,9 +274,10 @@ const initializeAdminWallet = () => {
   if (!usersJson) return;
   
   const users = JSON.parse(usersJson);
-  const adminUser = Object.values(users).find((user: any) => user.isAdmin);
+  // Type check the admin user using type guard
+  const adminUser = Object.values(users).find((user: any) => user.isAdmin) as User | undefined;
   
-  if (adminUser) {
+  if (adminUser && adminUser.id) {
     const wallets = getWallets();
     if (!wallets[adminUser.id]) {
       wallets[adminUser.id] = { balance: 10000, currency: "USD" };
