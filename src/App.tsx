@@ -10,7 +10,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Wallet from "./pages/Wallet";
 import Admin from "./pages/Admin";
-import Navbar from "./components/layout/Navbar";
+import Navbar from "@/components/layout/Navbar";
 
 const queryClient = new QueryClient();
 
